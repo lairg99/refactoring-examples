@@ -33,6 +33,6 @@ class MainTest extends TestCase {
 Amount owed is 25.5
 You earned 5 frequent renter points";
 
-        $this->assertEquals($expected, $customer->print(new Console));
+        $this->assertEquals($expected, (new Console)->print($customer));
     }
 }

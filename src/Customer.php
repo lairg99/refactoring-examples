@@ -22,10 +22,6 @@ class Customer
         return $this->name;
     }
 
-    public function print(Printer $printer): string {
-        return $printer->print($this);
-    }
-
     public function getTotalFrequentRenterPoints(): int {
         return $this->rentals->sum->getFrequentRenterPoints();
     }
