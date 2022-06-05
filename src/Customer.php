@@ -18,9 +18,6 @@ class Customer
     }
 
     public function statement(): string {
-        $totalAmount = 0;
-        $frequentRenterPoints = 0;
-
         $result = 'Rental Record for ' . $this->getName() . "\n";
 
         for ($i = 0; $i < count($this->rentals); $i++) {
