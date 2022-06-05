@@ -2,10 +2,7 @@
 
 namespace App;
 
-use App\Pricing\ChildrenPrice;
-use App\Pricing\NewReleasePrice;
 use App\Pricing\Price;
-use App\Pricing\RegularPrice;
 use InvalidArgumentException;
 
 class Movie
