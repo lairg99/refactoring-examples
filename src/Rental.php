@@ -4,27 +4,27 @@ namespace App;
 
 class Rental
 {
-    private Movie $_movie;
-    private int $_daysRented;
+    private Movie $movie;
+    private int $daysRented;
 
-    public function __construct(Movie $_movie, int $_daysRented) {
-        $this->_movie = $_movie;
-        $this->_daysRented = $_daysRented;
+    public function __construct(Movie $movie, int $daysRented) {
+        $this->movie = $movie;
+        $this->daysRented = $daysRented;
     }
 
     public function getMovie(): Movie {
-        return $this->_movie;
+        return $this->movie;
     }
 
     public function getDaysRented(): int {
-        return $this->_daysRented;
+        return $this->daysRented;
     }
 
     public function getFrequentRenterPoints(): int {
-        return $this->_movie->getFrequentRenterPoints($this->_daysRented);
+        return $this->movie->getFrequentRenterPoints($this->daysRented);
     }
 
     public function getCharge(): float {
-        return $this->_movie->getCharge($this->_daysRented);
+        return $this->movie->getCharge($this->daysRented);
     }
 }

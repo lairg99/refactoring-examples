@@ -4,21 +4,21 @@ namespace App;
 
 class Customer
 {
-    private string $_name;
+    private string $name;
 
     /** @var array<Rental> */
-    private array $_rentals = [];
+    private array $rentals = [];
 
     public function __construct(string $_name) {
-        $this->_name = $_name;
+        $this->name = $_name;
     }
 
     public function addRental(Rental $rental): void {
-        $this->_rentals[] = $rental;
+        $this->rentals[] = $rental;
     }
 
     public function getName(): string {
-        return $this->_name;
+        return $this->name;
     }
 
     public function statement(): string {
@@ -27,8 +27,8 @@ class Customer
 
         $result = 'Rental Record for ' . $this->getName() . "\n";
 
-        for ($i = 0; $i < count($this->_rentals); $i++) {
-            $each = $this->_rentals[$i];
+        for ($i = 0; $i < count($this->rentals); $i++) {
+            $each = $this->rentals[$i];
 
             // show figures for this rental
             $result .= "\t" . $each->getMovie()->getTitle() . "\t" . $each->getCharge() . "\n";
@@ -44,8 +44,8 @@ class Customer
     private function getTotalFrequentRenterPoints(): int {
         $result = 0;
 
-        for ($i = 0; $i < count($this->_rentals); $i++) {
-            $each = $this->_rentals[$i];
+        for ($i = 0; $i < count($this->rentals); $i++) {
+            $each = $this->rentals[$i];
 
             $result += $each->getFrequentRenterPoints();
         }
@@ -56,8 +56,8 @@ class Customer
     private function getTotalCharge(): float {
         $result = 0;
 
-        for ($i = 0; $i < count($this->_rentals); $i++) {
-            $each = $this->_rentals[$i];
+        for ($i = 0; $i < count($this->rentals); $i++) {
+            $each = $this->rentals[$i];
 
             $result += $each->getCharge();
         }

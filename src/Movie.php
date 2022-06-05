@@ -14,30 +14,30 @@ class Movie
     const REGULAR = 0;
     const NEW_RELEASE = 1;
 
-    private string $_title;
-    private int $_priceCode;
+    private string $title;
+    private int $priceCode;
 
-    private Price $_price;
+    private Price $price;
 
     public function __construct(string $_title, int $_priceCode) {
-        $this->_title = $_title;
+        $this->title = $_title;
         $this->setPriceCode($_priceCode);
     }
 
     public function getPriceCode(): int {
-        return $this->_price->getPriceCode();
+        return $this->price->getPriceCode();
     }
 
     public function setPriceCode(int $priceCode): void {
         switch ($priceCode) {
             case self::REGULAR:
-                $this->_price = new RegularPrice;
+                $this->price = new RegularPrice;
                 break;
             case self::CHILDREN:
-                $this->_price = new ChildrenPrice;
+                $this->price = new ChildrenPrice;
                 break;
             case self::NEW_RELEASE:
-                $this->_price = new NewReleasePrice;
+                $this->price = new NewReleasePrice;
                 break;
             default:
                 throw new InvalidArgumentException('Incorrect price code');
@@ -45,14 +45,14 @@ class Movie
     }
 
     public function getTitle(): string {
-        return $this->_title;
+        return $this->title;
     }
 
     public function getFrequentRenterPoints(int $daysRented): int {
-        return $this->_price->getFrequentRenterPoints($daysRented);
+        return $this->price->getFrequentRenterPoints($daysRented);
     }
 
     public function getCharge(int $daysRented): float {
-        return $this->_price->getCharge($daysRented);
+        return $this->price->getCharge($daysRented);
     }
 }
