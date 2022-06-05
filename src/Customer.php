@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Printer\Printer;
 use Illuminate\Support\Collection;
 
 class Customer
@@ -21,28 +22,19 @@ class Customer
         return $this->name;
     }
 
-    public function statement(): string {
-        $result = 'Rental Record for ' . $this->getName() . "\n";
-
-        for ($i = 0; $i < count($this->rentals); $i++) {
-            $each = $this->rentals[$i];
-
-            // show figures for this rental
-            $result .= "\t" . $each->getMovie()->getTitle() . "\t" . $each->getCharge() . "\n";
-        }
-
-        // add footer lines
-        $result .= 'Amount owed is ' . $this->getTotalCharge() . "\n";
-        $result .= 'You earned ' . $this->getTotalFrequentRenterPoints() . ' frequent renter points';
-
-        return $result;
+    public function print(Printer $printer): string {
+        return $printer->print($this);
     }
 
-    private function getTotalFrequentRenterPoints(): int {
+    public function getTotalFrequentRenterPoints(): int {
         return $this->rentals->sum->getFrequentRenterPoints();
     }
 
-    private function getTotalCharge(): float {
+    public function getTotalCharge(): float {
         return $this->rentals->sum->getCharge();
+    }
+
+    public function getRentals(): Collection {
+        return $this->rentals;
     }
 }

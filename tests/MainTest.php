@@ -6,6 +6,7 @@ use App\Customer;
 use App\Movie;
 use App\Pricing\ChildrenPrice;
 use App\Pricing\NewReleasePrice;
+use App\Printer\Console;
 use App\Rental;
 use PHPUnit\Framework\TestCase;
 
@@ -32,6 +33,6 @@ class MainTest extends TestCase {
 Amount owed is 25.5
 You earned 5 frequent renter points";
 
-        $this->assertEquals($expected, $customer->statement());
+        $this->assertEquals($expected, $customer->print(new Console));
     }
 }
