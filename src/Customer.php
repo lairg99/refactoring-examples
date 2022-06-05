@@ -2,15 +2,19 @@
 
 namespace App;
 
+use Illuminate\Support\Collection;
+
 class Customer
 {
-    /** @var array<Rental> */
-    private array $rentals = [];
+    /** @var Collection<int, Rental> */
+    private Collection $rentals;
 
-    public function __construct(private readonly string $name) {}
+    public function __construct(private readonly string $name) {
+        $this->rentals = collect();
+    }
 
     public function addRental(Rental $rental): void {
-        $this->rentals[] = $rental;
+        $this->rentals->add($rental);
     }
 
     public function getName(): string {
@@ -35,22 +39,10 @@ class Customer
     }
 
     private function getTotalFrequentRenterPoints(): int {
-        $result = 0;
-
-        foreach ($this->rentals as $rental) {
-            $result += $rental->getFrequentRenterPoints();
-        }
-
-        return $result;
+        return $this->rentals->sum->getFrequentRenterPoints();
     }
 
     private function getTotalCharge(): float {
-        $result = 0;
-
-        foreach ($this->rentals as $rental) {
-            $result += $rental->getCharge();
-        }
-
-        return $result;
+        return $this->rentals->sum->getCharge();
     }
 }
