@@ -15,17 +15,12 @@ class Movie
     const NEW_RELEASE = 1;
 
     private string $title;
-    private int $priceCode;
 
     private Price $price;
 
     public function __construct(string $_title, int $_priceCode) {
         $this->title = $_title;
         $this->setPriceCode($_priceCode);
-    }
-
-    public function getPriceCode(): int {
-        return $this->price->getPriceCode();
     }
 
     public function setPriceCode(int $priceCode): void {
