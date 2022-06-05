@@ -6,5 +6,7 @@ use App\Customer;
 
 abstract class Printer
 {
-    public abstract function print(Customer $customer): string;
+    public function __construct(protected Customer $customer) {}
+
+    public abstract function print(): string;
 }
