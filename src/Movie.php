@@ -24,19 +24,12 @@ class Movie
     }
 
     public function setPriceCode(int $priceCode): void {
-        switch ($priceCode) {
-            case self::REGULAR:
-                $this->price = new RegularPrice;
-                break;
-            case self::CHILDREN:
-                $this->price = new ChildrenPrice;
-                break;
-            case self::NEW_RELEASE:
-                $this->price = new NewReleasePrice;
-                break;
-            default:
-                throw new InvalidArgumentException('Incorrect price code');
-        }
+        match ($priceCode) {
+            self::REGULAR => $this->price = new RegularPrice,
+            self::CHILDREN => $this->price = new ChildrenPrice,
+            self::NEW_RELEASE => $this->price = new NewReleasePrice,
+            default => throw new InvalidArgumentException('Incorrect price code')
+        };
     }
 
     public function getTitle(): string {
