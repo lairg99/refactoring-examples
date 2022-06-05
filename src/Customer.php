@@ -30,16 +30,25 @@ class Customer
         for ($i = 0; $i < count($this->_rentals); $i++) {
             $each = $this->_rentals[$i];
 
-            // add frequent renter points
-            $frequentRenterPoints += $each->getFrequentRenterPoints();
-
             // show figures for this rental
             $result .= "\t" . $each->getMovie()->getTitle() . "\t" . $each->getCharge() . "\n";
         }
 
         // add footer lines
         $result .= 'Amount owed is ' . $this->getTotalCharge() . "\n";
-        $result .= 'You earned ' . $frequentRenterPoints . ' frequent renter points';
+        $result .= 'You earned ' . $this->getTotalFrequentRenterPoints() . ' frequent renter points';
+
+        return $result;
+    }
+
+    private function getTotalFrequentRenterPoints(): int {
+        $result = 0;
+
+        for ($i = 0; $i < count($this->_rentals); $i++) {
+            $each = $this->_rentals[$i];
+
+            $result += $each->getFrequentRenterPoints();
+        }
 
         return $result;
     }
