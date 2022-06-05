@@ -10,24 +10,20 @@ use InvalidArgumentException;
 
 class Movie
 {
-    const CHILDREN = 2;
-    const REGULAR = 0;
-    const NEW_RELEASE = 1;
-
     private Price $price;
 
     public function __construct(
         private readonly string $title,
-        int $priceCode
+        string $priceStrategy
     ) {
-        $this->setPriceCode($priceCode);
+        $this->setPriceByStrategy($priceStrategy);
     }
 
-    public function setPriceCode(int $priceCode): void {
-        match ($priceCode) {
-            self::REGULAR => $this->price = new RegularPrice,
-            self::CHILDREN => $this->price = new ChildrenPrice,
-            self::NEW_RELEASE => $this->price = new NewReleasePrice,
+    public function setPriceByStrategy(string $priceStrategy): void {
+        match ($priceStrategy) {
+            RegularPrice::class => $this->price = new RegularPrice,
+            ChildrenPrice::class => $this->price = new ChildrenPrice,
+            NewReleasePrice::class => $this->price = new NewReleasePrice,
             default => throw new InvalidArgumentException('Incorrect price code')
         };
     }
