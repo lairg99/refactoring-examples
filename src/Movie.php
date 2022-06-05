@@ -20,12 +20,15 @@ class Movie
     }
 
     public function setPriceByStrategy(string $priceStrategy): void {
-        match ($priceStrategy) {
-            RegularPrice::class => $this->price = new RegularPrice,
-            ChildrenPrice::class => $this->price = new ChildrenPrice,
-            NewReleasePrice::class => $this->price = new NewReleasePrice,
-            default => throw new InvalidArgumentException('Incorrect price code')
-        };
+        if (!class_exists($priceStrategy)) {
+            throw new InvalidArgumentException("$priceStrategy is not defined");
+        }
+
+        if (!(new $priceStrategy instanceof Price)) {
+            throw new InvalidArgumentException("$priceStrategy must extend from price");
+        }
+
+        $this->price = new $priceStrategy;
     }
 
     public function getTitle(): string {
