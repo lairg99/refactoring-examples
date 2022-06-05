@@ -37,10 +37,8 @@ class Customer
     private function getTotalFrequentRenterPoints(): int {
         $result = 0;
 
-        for ($i = 0; $i < count($this->rentals); $i++) {
-            $each = $this->rentals[$i];
-
-            $result += $each->getFrequentRenterPoints();
+        foreach ($this->rentals as $rental) {
+            $result += $rental->getFrequentRenterPoints();
         }
 
         return $result;
@@ -49,10 +47,8 @@ class Customer
     private function getTotalCharge(): float {
         $result = 0;
 
-        for ($i = 0; $i < count($this->rentals); $i++) {
-            $each = $this->rentals[$i];
-
-            $result += $each->getCharge();
+        foreach ($this->rentals as $rental) {
+            $result += $rental->getCharge();
         }
 
         return $result;
