@@ -2,6 +2,12 @@
 
 namespace App;
 
+use App\Pricing\ChildrenPrice;
+use App\Pricing\NewReleasePrice;
+use App\Pricing\Price;
+use App\Pricing\RegularPrice;
+use InvalidArgumentException;
+
 class Movie
 {
     const CHILDREN = 2;
@@ -11,17 +17,31 @@ class Movie
     private string $_title;
     private int $_priceCode;
 
+    private Price $_price;
+
     public function __construct(string $_title, int $_priceCode) {
         $this->_title = $_title;
         $this->setPriceCode($_priceCode);
     }
 
     public function getPriceCode(): int {
-        return $this->_priceCode;
+        return $this->_price->getPriceCode();
     }
 
     public function setPriceCode(int $priceCode): void {
-        $this->_priceCode = $priceCode;
+        switch ($priceCode) {
+            case self::REGULAR:
+                $this->_price = new RegularPrice;
+                break;
+            case self::CHILDREN:
+                $this->_price = new ChildrenPrice;
+                break;
+            case self::NEW_RELEASE:
+                $this->_price = new NewReleasePrice;
+                break;
+            default:
+                throw new InvalidArgumentException('Incorrect price code');
+        }
     }
 
     public function getTitle(): string {
@@ -29,32 +49,10 @@ class Movie
     }
 
     public function getFrequentRenterPoints(int $daysRented): int {
-        if(($this->getPriceCode() == Movie::NEW_RELEASE) && $daysRented > 1) {
-            return 2;
-        }
-
-        return 1;
+        return $this->_price->getFrequentRenterPoints($daysRented);
     }
 
     public function getCharge(int $daysRented): float {
-        $thisAmount = 0;
-
-        switch ($this->getPriceCode()) {
-            case Movie::REGULAR:
-                $thisAmount += 2;
-                if ($daysRented > 2)
-                    $thisAmount += ($daysRented - 2) * 1.5;
-                break;
-            case Movie::NEW_RELEASE:
-                $thisAmount += $daysRented * 3;
-                break;
-            case Movie::CHILDREN:
-                $thisAmount += 1.5;
-                if ($daysRented > 3)
-                    $thisAmount += ($daysRented - 3) * 1.5;
-                break;
-        }
-
-        return $thisAmount;
+        return $this->_price->getCharge($daysRented);
     }
 }
