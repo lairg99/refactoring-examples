@@ -28,6 +28,14 @@ class Movie
         return $this->_title;
     }
 
+    public function getFrequentRenterPoints(int $daysRented): int {
+        if(($this->getPriceCode() == Movie::NEW_RELEASE) && $daysRented > 1) {
+            return 2;
+        }
+
+        return 1;
+    }
+
     public function getCharge(int $daysRented): float {
         $thisAmount = 0;
 
