@@ -4,14 +4,10 @@ namespace App;
 
 class Customer
 {
-    private string $name;
-
     /** @var array<Rental> */
     private array $rentals = [];
 
-    public function __construct(string $_name) {
-        $this->name = $_name;
-    }
+    public function __construct(private readonly string $name) {}
 
     public function addRental(Rental $rental): void {
         $this->rentals[] = $rental;

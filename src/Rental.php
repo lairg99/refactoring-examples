@@ -4,13 +4,10 @@ namespace App;
 
 class Rental
 {
-    private Movie $movie;
-    private int $daysRented;
-
-    public function __construct(Movie $movie, int $daysRented) {
-        $this->movie = $movie;
-        $this->daysRented = $daysRented;
-    }
+    public function __construct(
+        private readonly Movie $movie,
+        private readonly int $daysRented
+    ) {}
 
     public function getMovie(): Movie {
         return $this->movie;
