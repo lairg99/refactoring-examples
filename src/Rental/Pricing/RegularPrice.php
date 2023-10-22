@@ -6,10 +6,6 @@ use App\Rental\Movie;
 
 class RegularPrice extends Price
 {
-    public function getPriceCode(): int {
-        return Movie::REGULAR;
-    }
-
     public function getCharge(int $daysRented): float {
         $amount = 2;
 
