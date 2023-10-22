@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Rental;
 
-use App\Pricing\Price;
+use App\Rental\Pricing\Price;
 use InvalidArgumentException;
 
 class Movie

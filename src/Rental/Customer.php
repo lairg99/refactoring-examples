@@ -1,8 +1,7 @@
 <?php
 
-namespace App;
+namespace App\Rental;
 
-use App\Printer\Printer;
 use Illuminate\Support\Collection;
 
 class Customer

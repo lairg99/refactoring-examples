@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Printer;
+namespace App\Rental\Printer;
 
 class Console extends Printer
 {

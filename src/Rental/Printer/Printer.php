@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Printer;
+namespace App\Rental\Printer;
 
-use App\Customer;
+use App\Rental\Customer;
 
 abstract class Printer
 {

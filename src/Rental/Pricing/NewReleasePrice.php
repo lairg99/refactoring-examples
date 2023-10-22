@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Pricing;
+namespace App\Rental\Pricing;
 
-use App\Movie;
+use App\Rental\Movie;
 
 class NewReleasePrice extends Price
 {

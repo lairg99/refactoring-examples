@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Pricing;
-
-use App\Movie;
+namespace App\Rental\Pricing;
 
 abstract class Price
 {
