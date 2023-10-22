@@ -1,7 +1,8 @@
 {
   "require": {
     "php": "^8.2",
-    "illuminate/collections": "^10.28"
+    "illuminate/collections": "^10.28",
+    "illuminate/support": "^10.28"
   },
   "autoload": {
     "psr-4": {
